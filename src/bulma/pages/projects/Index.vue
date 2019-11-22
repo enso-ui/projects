@@ -2,11 +2,6 @@
     <enso-table id="projects"
         class="box is-paddingless raises-on-hover is-rounded"
         :path="path">
-        <template v-slot:contract="{ row }">
-            <span v-if="row.contractNumber" class="tag is-table-tag is-info">
-                {{ `${row.contractNumber} / ${row.contractDate}` }}
-            </span>
-        </template>
         <template v-slot:status="{ row }">
             <span class="tag is-table-tag">
                 {{ i18n(row.status) }}

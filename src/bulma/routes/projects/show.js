@@ -2,7 +2,7 @@ const ProjectShow = () => import('../../pages/projects/Show.vue');
 
 export default {
     name: 'projects.show',
-    path: ':project/edit',
+    path: ':project',
     component: ProjectShow,
     meta: {
         breadcrumb: 'show',
