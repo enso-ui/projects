@@ -13,8 +13,9 @@
         <enso-table id="projects"
             class="box is-paddingless raises-on-hover is-rounded"
             :path="path"
+            :params="params"
             @reset="$refs.filterState.reset()">
-            <template v-slot:status="{ row }">
+            <template v-slot:businessDomains="{ row }">
                 <span v-for="businessDomain in row.businessDomainsArray"
                     :key="businessDomain"
                     class="tag is-table-tag is-info has-margin-right-small">
