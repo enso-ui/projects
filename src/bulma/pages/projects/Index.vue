@@ -12,7 +12,8 @@
         </div>
         <enso-table id="projects"
             class="box is-paddingless raises-on-hover is-rounded"
-            :path="path">
+            :path="path"
+            @reset="$refs.filterState.reset()">
             <template v-slot:status="{ row }">
                 <span v-for="businessDomain in row.businessDomainsArray"
                     :key="businessDomain"
@@ -28,7 +29,7 @@
         </enso-table>
 
         <filter-state ref="filterState"
-            name="contractFilters"
+            name="projectFilters"
             :api-version="apiVersion"
             :params="params"
             @ready="ready = true"/>
