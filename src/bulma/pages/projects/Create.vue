@@ -11,6 +11,8 @@
 import { EnsoForm } from '@enso-ui/bulma';
 
 export default {
+    name: 'Create',
+
     components: { EnsoForm },
 };
 
