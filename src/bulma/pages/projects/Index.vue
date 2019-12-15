@@ -42,6 +42,7 @@
 import {
     EnsoTable, EnsoSelectFilter, FilterState,
 } from '@enso-ui/bulma';
+
 export default {
     components: {
         EnsoTable, FilterState, EnsoSelectFilter,
