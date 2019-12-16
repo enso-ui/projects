@@ -82,7 +82,7 @@ export default {
 
     computed: {
         balance() {
-            return 100 - this.lines.reduce((sum, project) => sum + project.amount, 0);
+            return this.lines.reduce((sum, project) => sum + project.amount, 0) - 100;
         },
         params() {
             return {
