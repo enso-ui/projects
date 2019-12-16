@@ -6,6 +6,7 @@
         <td>
             <vue-select v-model="line.project_id"
                 :source="route('projects.options')"
+                :params="{'status': enums.projectStatuses.Ongoing}"
                 :has-error="errors.has(`projects.${index}.project_id`)"
                 @input="errors.clear(`projects.${index}.project_id`); $emit('changed')"/>
         </td>
@@ -44,6 +45,7 @@ import {
     faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { VueSelect } from '@enso-ui/select/bulma';
+import { mapState } from 'vuex';
 
 library.add(faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner);
 
@@ -73,6 +75,7 @@ export default {
         },
     },
     computed: {
+        ...mapState(['enums']),
         hasError() {
             return this.errors.has('amount')
                 || this.errors.has(`amount-${this.index}`);

@@ -49,7 +49,7 @@ import FooterLine from './FooterLine.vue';
 import NoLines from './NoLines.vue';
 
 export default {
-    name: 'Lines',
+    name: 'Projects',
 
     components: {
         HeaderLine, RowLine, FooterLine, NoLines,
