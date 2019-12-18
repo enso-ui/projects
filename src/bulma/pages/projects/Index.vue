@@ -16,10 +16,10 @@
             :params="params"
             @reset="$refs.filterState.reset()">
             <template v-slot:businessDomains="{ row }">
-                <span v-for="businessDomain in row.businessDomainsArray"
-                    :key="businessDomain"
+                <span v-for="businessDomain in row.business_domains"
+                    :key="businessDomain.id"
                     class="tag is-table-tag is-info has-margin-right-small">
-                    {{ businessDomain }}
+                    {{ businessDomain.name }}
                 </span>
             </template>
             <template v-slot:status="{ row }">
