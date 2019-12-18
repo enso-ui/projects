@@ -37,7 +37,7 @@
             </no-lines>
         </div>
         <div class="has-text-centered"
-            v-else >
+            v-else>
             <span class="icon">
                 <fa icon="spinner"
                     spin/>
@@ -109,7 +109,7 @@ export default {
                 call().then((result) => {
                     this.processing = false;
                     return result;
-                }).catch(error => this.handleError(error));
+                }).catch((error) => this.handleError(error));
             };
 
             this.promise = this.promise

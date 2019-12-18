@@ -3,7 +3,7 @@
         <td class="is-numeric">
             {{ index + 1 }}.
         </td>
-        <td>
+        <td dir="ltr">
             <vue-select v-model="line.project_id"
                 :source="route('projects.options')"
                 :params="{'status': enums.projectStatuses.Ongoing}"
