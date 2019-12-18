@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/projects",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Basic projects package",
   "main": "src/bulma/pages/projects/Index.vue",
   "scripts": {
