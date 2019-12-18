@@ -1,10 +1,12 @@
 <template>
     <div class="wrapper">
-        <div v-if="! processing || hasLines()" class="table-responsive">
-            <table v-if="hasLines()"
-                   class="table is-striped is-marginless is-narrow project-table" dir="ltr">
+        <div class="table-responsive"
+            v-if="! processing || hasLines">
+            <table class="table is-striped is-marginless is-narrow project-table"
+                v-if="hasLines">
                 <header-line v-bind="$attrs"/>
-                <transition-group name="lines" tag="tbody">
+                <transition-group name="lines"
+                    tag="tbody">
                     <tr is="row-line"
                         v-for="(line,index) in lines"
                         :key="index"
@@ -16,8 +18,7 @@
                         v-on="$listeners"
                         @remove="removeLine(index)"/>
                 </transition-group>
-                <footer-line
-                    :balance="balance"
+                <footer-line :balance="balance"
                     :processing="processing"
                     @add-line="addLine"
                     @save="save">
@@ -26,17 +27,21 @@
                     </template>
                 </footer-line>
             </table>
-            <no-lines v-else
-                v-on="$listeners"
+            <no-lines v-on="$listeners"
                 :processing="processing"
-                @add-line="addLine">
+                @add-line="addLine"
+                v-else>
                 <template v-slot:actions-left>
                     <slot name="actions-left"/>
                 </template>
             </no-lines>
         </div>
-        <div v-else class="has-text-centered">
-            <span class="icon"><fa icon="spinner" spin/></span>
+        <div class="has-text-centered"
+            v-else >
+            <span class="icon">
+                <fa icon="spinner"
+                    spin/>
+            </span>
         </div>
     </div>
 </template>
@@ -55,16 +60,16 @@ export default {
         HeaderLine, RowLine, FooterLine, NoLines,
     },
 
+    inject: ['route', 'errorHandler'],
+
     props: {
         id: {
             type: Number,
             default: null,
-            required: false,
         },
         ids: {
             type: Array,
-            default: null,
-            required: false,
+            default: () => null,
         },
         type: {
             type: String,
@@ -78,8 +83,6 @@ export default {
         processing: true,
     }),
 
-    inject: ['route', 'errorHandler'],
-
     computed: {
         balance() {
             return this.lines.reduce((sum, project) => sum + project.amount, 0) - 100;
@@ -90,6 +93,9 @@ export default {
                 projectable_type: this.type,
             };
         },
+        hasLines() {
+            return this.lines.length > 0;
+        },
     },
 
     created() {
@@ -97,9 +103,6 @@ export default {
     },
 
     methods: {
-        hasLines() {
-            return this.lines.length > 0;
-        },
         chainRequest(call) {
             const processing = () => {
                 this.processing = true;

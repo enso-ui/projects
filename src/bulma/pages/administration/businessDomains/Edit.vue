@@ -7,11 +7,11 @@
 </template>
 
 <script>
-
 import { EnsoForm } from '@enso-ui/bulma';
 
 export default {
+    name: 'Edit',
+
     components: { EnsoForm },
 };
-
 </script>

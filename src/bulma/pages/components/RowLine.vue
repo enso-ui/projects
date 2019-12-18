@@ -12,17 +12,17 @@
         </td>
         <td class="has-text-right">
             <p class="control has-icons-right has-text-right">
-                <input v-model.number="line.amount"
-                    class="input is-numeric "
+                <input class="input is-numeric"
                     :class="{'is-danger': hasError}"
+                    v-model.number="line.amount"
                     :placeholder="i18n('amount')"
                     @input="clearErrors();">
             </p>
         </td>
         <td class="has-text-right small">
-            <a v-if="balance !== 0"
-               class="button is-naked"
-               @click="updateBalance">
+            <a class="button is-naked"
+                @click="updateBalance"
+                v-if="balance !== 0">
                 <span class="icon is-small danger">
                     <fa icon="balance-scale-right"
                         size="xs"/>
@@ -50,6 +50,8 @@ import { mapState } from 'vuex';
 library.add(faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner);
 
 export default {
+    name: 'ProjectLine',
+
     inject: [
         'i18n', 'errorHandler', 'route',
     ],

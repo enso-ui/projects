@@ -8,7 +8,6 @@
 </template>
 
 <script>
-
 import { EnsoForm } from '@enso-ui/bulma';
 
 export default {
@@ -16,5 +15,4 @@ export default {
 
     components: { EnsoForm },
 };
-
 </script>

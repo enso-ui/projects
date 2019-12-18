@@ -1,7 +1,7 @@
 <template>
     <v-popover v-bind="$attrs"
-       v-on="$listeners"
-       ref="popover">
+        v-on="$listeners"
+        ref="popover">
         <slot name="target"/>
         <template v-slot:popover>
             <div v-if="$refs.popover && $refs.popover.isOpen">

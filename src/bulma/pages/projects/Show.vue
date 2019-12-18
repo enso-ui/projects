@@ -18,13 +18,11 @@
 </template>
 
 <script>
-
 import { Accessories, Tab, Discussions } from '@enso-ui/bulma';
 
 export default {
     components: { Accessories, Tab, Discussions },
 };
-
 </script>
 
 <style lang="scss">
