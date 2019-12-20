@@ -9,7 +9,7 @@
                     tag="tbody">
                     <tr is="row-line"
                         v-for="(line,index) in lines"
-                        :key="index"
+                        :key="`line-${index}`"
                         class="line"
                         :line="line"
                         :index="index"
@@ -144,7 +144,10 @@ export default {
         },
         removeLine(index) {
             this.lines.splice(index, 1);
-            this.save();
+
+            if (this.lines.length === 0) {
+                this.save();
+            }
         },
         handleError(error) {
             this.processing = false;

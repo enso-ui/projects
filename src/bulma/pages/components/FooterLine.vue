@@ -12,11 +12,11 @@
             </td>
             <td class="is-bold has-text-right has-text-danger balance">
                 <span class="is-bold has-text-right has-text-danger"
-                    v-if="balance !== 0">
+                    v-if="![-100, 0].includes(balance)">
                     {{ balance }}
                 </span>
                 <span class="has-text-success"
-                    v-else>
+                    v-else-if="balance === 0">
                     {{ i18n('balanced') }}
                     <span class="icon">
                         <fa icon="check"/>

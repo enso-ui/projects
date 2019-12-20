@@ -7,8 +7,8 @@
             <th>
                 {{ i18n('Project') }}
             </th>
-            <th class="amount">
-                {{ i18n('Amount') }}
+            <th class="split">
+                {{ i18n('Split') }} (%)
             </th>
             <th class="small"/>
         </tr>
@@ -28,7 +28,7 @@ export default {
         th {
             text-align: center !important;
 
-            &.amount {
+            &.split {
                 width: 10em;
             }
 

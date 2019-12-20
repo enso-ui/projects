@@ -8,15 +8,24 @@
                 :source="route('projects.options')"
                 :params="{'status': enums.projectStatuses.Ongoing}"
                 :has-error="errors.has(`projects.${index}.project_id`)"
-                @input="errors.clear(`projects.${index}.project_id`); $emit('changed')"/>
+                @input="errors.clear(`projects.${index}.project_id`); updateBalance()"/>
+            <p class="help is-danger"
+                v-if="errors.has(`projects.${index}.project_id`)">
+                {{ errors.get(`projects.${index}.project_id`) }}
+            </p>
         </td>
         <td class="has-text-right">
             <p class="control has-icons-right has-text-right">
                 <input class="input is-numeric"
                     :class="{'is-danger': hasError}"
+                    v-select-on-focus
                     v-model.number="line.amount"
                     :placeholder="i18n('amount')"
                     @input="clearErrors();">
+            </p>
+            <p class="help is-danger"
+                v-if="hasError">
+                {{ errors.get(`projects.${this.index}.amount`) || errors.get('amount') }}
             </p>
         </td>
         <td class="has-text-right small">
@@ -40,23 +49,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { VueSelect } from '@enso-ui/select/bulma';
-import { mapState } from 'vuex';
+import { selectOnFocus } from '@enso-ui/directives';
 
 library.add(faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner);
 
 export default {
     name: 'ProjectLine',
 
+    directives: { selectOnFocus },
+
+    components: { VueSelect },
+
     inject: [
         'i18n', 'errorHandler', 'route',
     ],
-
-    components: { VueSelect },
 
     props: {
         line: {
@@ -80,18 +92,19 @@ export default {
         ...mapState(['enums']),
         hasError() {
             return this.errors.has('amount')
-                || this.errors.has(`amount-${this.index}`);
+                || this.errors.has(`projects.${this.index}.amount`);
         },
     },
     methods: {
         updateBalance() {
-            this.line.amount -= this.balance;
-            this.line.amount = Math.round(this.line.amount * 100) / 100;
-            this.clearErrors();
+            if (this.line.project_id) {
+                this.line.amount -= this.balance;
+                this.clearErrors();
+            }
         },
         clearErrors() {
             this.errors.clear('amount');
-            this.errors.clear(`amount-${this.index}`);
+            this.errors.clear(`projects.${this.index}.amount`);
         },
     },
 };
