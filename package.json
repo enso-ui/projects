@@ -28,7 +28,7 @@
     "@enso-ui/select": "1.1.x",
     "@enso-ui/ui": "2.2.x",
     "@enso-ui/mixins": "1.0.x",
-    "@enso-ui/accessories": "2.2.x",
+    "@enso-ui/accessories": "2.3.x",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
     "@fortawesome/pro-solid-svg-icons": "^5.10.1",
