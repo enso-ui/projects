@@ -58,10 +58,10 @@ export default {
         },
         filters: {
             projects: {
-                status: null
+                status: null,
             },
         },
     }),
-    computed: mapState(['enums'])
+    computed: mapState(['enums']),
 };
 </script>
