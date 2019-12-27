@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="table-responsive"
             v-if="! processing || hasLines">
-            <table class="table is-striped is-marginless is-narrow project-table"
+            <table class="table is-striped is-marginless is-narrow split-table"
                 v-if="hasLines">
                 <header-line v-bind="$attrs"/>
                 <transition-group name="lines"
@@ -14,6 +14,7 @@
                         :line="line"
                         :index="index"
                         :balance="balance"
+                        :processing="processing"
                         :errors="errors"
                         v-on="$listeners"
                         @remove="removeLine(index)"/>
@@ -54,7 +55,7 @@ import FooterLine from './FooterLine.vue';
 import NoLines from './NoLines.vue';
 
 export default {
-    name: 'Projects',
+    name: 'Splits',
 
     components: {
         HeaderLine, RowLine, FooterLine, NoLines,
@@ -85,12 +86,12 @@ export default {
 
     computed: {
         balance() {
-            return this.lines.reduce((sum, project) => sum + project.amount, 0) - 100;
+            return this.lines.reduce((sum, split) => sum + split.percent, 0) - 100;
         },
         params() {
             return {
-                projectable_ids: this.id ? [this.id] : this.ids,
-                projectable_type: this.type,
+                splittable_ids: this.id ? [this.id] : this.ids,
+                splittable_type: this.type,
             };
         },
         hasLines() {
@@ -103,43 +104,38 @@ export default {
     },
 
     methods: {
-        chainRequest(call) {
-            const processing = () => {
-                this.processing = true;
-                call().then((result) => {
-                    this.processing = false;
-                    return result;
-                }).catch((error) => this.handleError(error));
-            };
+        request(request) {
+            this.processing = true;
 
-            this.promise = this.promise
-                ? this.promise.then(processing)
-                : processing();
+            request().then((result) => {
+                this.processing = false;
+                return result;
+            }).catch((error) => this.handleError(error));
         },
         save() {
-            const call = () => axios.post(this.route('projects.financials.store'), {
+            const request = () => axios.post(this.route('projects.splits.store'), {
                 ...this.params,
-                projects: this.lines,
+                splits: this.lines,
             }).then(({ data }) => {
                 this.$toastr.success(data.message);
                 this.$emit('save');
             });
 
-            this.chainRequest(call);
+            this.request(request);
         },
         load() {
-            const call = () => axios.get(this.route('projects.financials.index'), {
+            const request = () => axios.get(this.route('projects.splits.index'), {
                 params: this.params,
             }).then(({ data }) => {
                 this.lines = data;
             });
 
-            this.chainRequest(call);
+            this.request(request);
         },
         addLine() {
             this.lines.push({
                 project_id: null,
-                amount: 0,
+                percent: 0,
             });
         },
         removeLine(index) {
@@ -167,7 +163,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .project-table {
+    .split-table {
         width: 650px;
 
         th {

@@ -1,5 +1,5 @@
 <template>
-    <tr class="project-line">
+    <tr class="split-line">
         <td class="is-numeric">
             {{ index + 1 }}.
         </td>
@@ -7,11 +7,11 @@
             <vue-select v-model="line.project_id"
                 :source="route('projects.options')"
                 :params="{'status': enums.projectStatuses.Ongoing}"
-                :has-error="errors.has(`projects.${index}.project_id`)"
-                @input="errors.clear(`projects.${index}.project_id`); updateBalance()"/>
+                :has-error="errors.has(`splits.${index}.project_id`)"
+                @input="errors.clear(`splits.${index}.project_id`); updateBalance()"/>
             <p class="help is-danger"
-                v-if="errors.has(`projects.${index}.project_id`)">
-                {{ errors.get(`projects.${index}.project_id`) }}
+                v-if="errors.has(`splits.${index}.project_id`)">
+                {{ errors.get(`splits.${index}.project_id`) }}
             </p>
         </td>
         <td class="has-text-right">
@@ -19,13 +19,13 @@
                 <input class="input is-numeric"
                     :class="{'is-danger': hasError}"
                     v-select-on-focus
-                    v-model.number="line.amount"
-                    :placeholder="i18n('amount')"
+                    v-model.number="line.percent"
+                    :placeholder="i18n('percent')"
                     @input="clearErrors();">
             </p>
             <p class="help is-danger"
                 v-if="hasError">
-                {{ errors.get(`projects.${this.index}.amount`) || errors.get('amount') }}
+                {{ errors.get(`splits.${this.index}.percent`) || errors.get('percent') }}
             </p>
         </td>
         <td class="has-text-right small">
@@ -38,6 +38,7 @@
                 </span>
             </a>
             <a class="button is-naked"
+               :class="{'is-loading': processing}"
                @click="$emit('remove')">
                 <span class="icon is-small danger">
                     <fa icon="trash-alt"
@@ -60,7 +61,7 @@ import { selectOnFocus } from '@enso-ui/directives';
 library.add(faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner);
 
 export default {
-    name: 'ProjectLine',
+    name: 'RowLine',
 
     directives: { selectOnFocus },
 
@@ -87,24 +88,28 @@ export default {
             type: Object,
             required: true,
         },
+        processing: {
+            type: Boolean,
+            required: true,
+        },
     },
     computed: {
         ...mapState(['enums']),
         hasError() {
-            return this.errors.has('amount')
-                || this.errors.has(`projects.${this.index}.amount`);
+            return this.errors.has('percent')
+                || this.errors.has(`splits.${this.index}.percent`);
         },
     },
     methods: {
         updateBalance() {
             if (this.line.project_id) {
-                this.line.amount -= this.balance;
+                this.line.percent -= this.balance;
                 this.clearErrors();
             }
         },
         clearErrors() {
-            this.errors.clear('amount');
-            this.errors.clear(`projects.${this.index}.amount`);
+            this.errors.clear('percent');
+            this.errors.clear(`splits.${this.index}.percent`);
         },
     },
 };

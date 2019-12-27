@@ -1,6 +1,6 @@
 <template>
     <thead>
-        <tr class="has-background-light project-line-header">
+        <tr class="has-background-light split-line-header">
             <th class="index">
                 #
             </th>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-    tr.project-line-header {
+    tr.split-line-header {
         th {
             text-align: center !important;
 

@@ -1,5 +1,5 @@
 <template>
-    <tfoot class="project-line">
+    <tfoot class="split-line">
         <tr class="has-background-light">
             <td colspan="2">
                 <a class="button is-success"
