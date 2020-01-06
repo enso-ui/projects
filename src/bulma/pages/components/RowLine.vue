@@ -6,7 +6,7 @@
         <td dir="ltr">
             <vue-select v-model="line.project_id"
                 :source="route('projects.options')"
-                :params="{'status': enums.projectStatuses.Ongoing}"
+                :params="params"
                 :has-error="errors.has(`splits.${index}.project_id`)"
                 @input="errors.clear(`splits.${index}.project_id`); updateBalance()"/>
             <p class="help is-danger"
@@ -99,6 +99,9 @@ export default {
             return this.errors.has('percent')
                 || this.errors.has(`splits.${this.index}.percent`);
         },
+        params() {
+            return {'status': this.enums.projectStatuses.Ongoing};
+        }
     },
     methods: {
         updateBalance() {
