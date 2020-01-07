@@ -8,7 +8,7 @@
                         <discussions :id="parseInt($route.params.project, 10)"
                             ref="discussions"
                             controls
-                            type="LaravelEnso\Projects\app\Models\Project"
+                            type="LaravelEnso\Projects\App\Models\Project"
                             @update="$set(count, 'discussions', $refs.discussions.count)"/>
                     </tab>
                 </template>
