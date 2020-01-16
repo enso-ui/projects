@@ -6,7 +6,7 @@
         <td dir="ltr">
             <vue-select v-model="line.project_id"
                 :source="route('projects.options')"
-                :params="params"
+                :custom-params="params"
                 :has-error="errors.has(`splits.${index}.project_id`)"
                 @input="errors.clear(`splits.${index}.project_id`); updateBalance()"/>
             <p class="help is-danger"
@@ -25,7 +25,7 @@
             </p>
             <p class="help is-danger"
                 v-if="hasError">
-                {{ errors.get(`splits.${this.index}.percent`) || errors.get('percent') }}
+                {{ errors.get(`splits.${index}.percent`) || errors.get('percent') }}
             </p>
         </td>
         <td class="has-text-right small">
@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faTrashAlt, faPercentage, faBalanceScaleRight, faSpinner,
@@ -92,16 +91,16 @@ export default {
             type: Boolean,
             required: true,
         },
+        params: {
+            type: Object,
+            required: true,
+        },
     },
     computed: {
-        ...mapState(['enums']),
         hasError() {
             return this.errors.has('percent')
                 || this.errors.has(`splits.${this.index}.percent`);
         },
-        params() {
-            return {'status': this.enums.projectStatuses.Ongoing};
-        }
     },
     methods: {
         updateBalance() {

@@ -16,6 +16,7 @@
                         :balance="balance"
                         :processing="processing"
                         :errors="errors"
+                        :params="params"
                         v-on="$listeners"
                         @remove="removeLine(index)"/>
                 </transition-group>
