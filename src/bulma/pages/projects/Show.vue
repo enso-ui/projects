@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { Accessories, Tab, Discussions } from '@enso-ui/bulma';
+import { Accessories, Discussions } from '@enso-ui/accessories/bulma';
+import { Tab } from '@enso-ui/tabs/bulma';
 
 export default {
     components: { Accessories, Tab, Discussions },

@@ -43,7 +43,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import { EnsoTable, EnsoSelectFilter, FilterState } from '@enso-ui/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
+import { EnsoSelectFilter } from '@enso-ui/filters/bulma';
+import { FilterState } from '@enso-ui/filters/renderless';
 
 export default {
     components: { EnsoTable, FilterState, EnsoSelectFilter },
