@@ -4,7 +4,7 @@
         <card-header class="has-background-light">
             <template v-slot:title>
                 <fa class="icon is-small has-margin-right-small"
-                    icon="project -diagram"/>
+                    icon="project-diagram"/>
                 Projects
             </template>
             <template v-slot:controls>
