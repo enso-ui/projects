@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import Errors from '@enso-ui/forms/src/classes/Errors';
+import Errors from '@enso-ui/laravel-validation';
 import HeaderLine from './HeaderLine.vue';
 import RowLine from './RowLine.vue';
 import FooterLine from './FooterLine.vue';
