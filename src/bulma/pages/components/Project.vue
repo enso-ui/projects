@@ -51,7 +51,7 @@ library.add([faPencilAlt, faCheck]);
 export default {
     name: 'Project',
 
-    inject: ['route'],
+    inject: ['route', 'toastr'],
 
     props: {
         project: {
@@ -79,7 +79,7 @@ export default {
             axios.patch(this.route('projects.update', { project: this.project.id }), {
                 ...this.project, status: this.status,
             }).then(({ data }) => {
-                this.$toastr.success(data.message);
+                this.toastr.success(data.message);
                 this.$emit('updated');
             });
         },

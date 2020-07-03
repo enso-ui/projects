@@ -62,7 +62,7 @@ export default {
         HeaderLine, RowLine, FooterLine, NoLines,
     },
 
-    inject: ['route', 'errorHandler'],
+    inject: ['route', 'errorHandler', 'toastr'],
 
     props: {
         id: {
@@ -118,7 +118,7 @@ export default {
                 ...this.params,
                 splits: this.lines,
             }).then(({ data }) => {
-                this.$toastr.success(data.message);
+                this.toastr.success(data.message);
                 this.$emit('save');
             });
 
