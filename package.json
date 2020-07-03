@@ -22,7 +22,7 @@
   "homepage": "https://github.com/enso-ui/projects#readme",
   "dependencies": {
     "@enso-ui/accessories": "^3.0",
-    "@enso-ui/card": "^1.0",
+    "@enso-ui/card": "^2.0",
     "@enso-ui/directives": "^1.0",
     "@enso-ui/discussions": "^1.0",
     "@enso-ui/filters": "^2.0",
