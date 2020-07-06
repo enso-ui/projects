@@ -27,9 +27,9 @@
                     {{ businessDomain.name }}
                 </span>
             </template>
-            <template v-slot:status="{ row }">
+            <template v-slot:status="{ column, row }">
                 <span class="tag is-table-tag">
-                    {{ i18n(row.status) }}
+                    {{ column.enum._get(row.status) }}
                 </span>
             </template>
         </enso-table>
